@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Post } from "../post";
-import { PostsService } from "../posts.service";
 
 @Component({
   selector: "app-posts",
@@ -8,22 +7,23 @@ import { PostsService } from "../posts.service";
   styleUrls: ["./posts.component.css"]
 })
 export class PostsComponent implements OnInit {
-  constructor(private postsService: PostsService) {}
+  constructor() {}
 
-  posts: Post[];
-  originalPosts = [this.posts];
+  posts = [];
+  originalPosts = [...this.posts];
   filtered = false;
-
-  getPosts(): void {
-    this.postsService.getPosts().subscribe(posts => (this.posts = posts));
-  }
 
   onSelect(e): void {
     this.posts = this.posts.filter(post => post.user === e.target.id);
+    this.filtered = true;
+  }
+
+  onHomeClick(): void {
+    this.posts = this.originalPosts;
+    this.filtered = false;
   }
 
   ngOnInit() {
-    this.getPosts();
     this.tenSeconds();
   }
 
@@ -107,10 +107,15 @@ export class PostsComponent implements OnInit {
       this.posts.push(newPost);
       console.log(this.posts);
     }
+    this.originalPosts = [...this.posts];
   };
 
   tenSeconds = () => {
-    this.tenTweets();
-    setTimeout(this.tenSeconds, 10000);
+    if (this.filtered) {
+      return;
+    } else {
+      this.tenTweets();
+      setTimeout(this.tenSeconds, 10000);
+    }
   };
 }
