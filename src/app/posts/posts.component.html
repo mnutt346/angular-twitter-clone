@@ -1,0 +1,10 @@
+<h2>Tweets</h2>
+<ul class="posts">
+  <li *ngFor="let post of posts" class="post">
+    <span class="user" (click)="onSelect($event)" id="{{ post.user }}">{{
+      post.user
+    }}</span>
+    <span class="content">{{ post.content }}</span>
+    <span class="time-stamp">{{ post.timeStamp }}</span>
+  </li>
+</ul>
