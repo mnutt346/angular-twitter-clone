@@ -1,3 +1,17 @@
+<h2>Tweet Away!</h2>
+<form id="tweet-form">
+  <input #username type="text" placeholder="enter username" />
+  <textarea
+    #textInput
+    form="tweet-form"
+    rows="6"
+    cols="70"
+    maxlength="250"
+  ></textarea>
+  <button (click)="handleTweetClick(username.value, textInput.value)">
+    TWEET!
+  </button>
+</form>
 <h2>Tweets</h2>
 <button (click)="onHomeClick()">Home</button>
 <ul class="posts">

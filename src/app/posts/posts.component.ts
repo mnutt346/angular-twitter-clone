@@ -23,6 +23,15 @@ export class PostsComponent implements OnInit {
     this.filtered = false;
   }
 
+  handleTweetClick(username, tweet): void {
+    event.preventDefault();
+    let newTweet = new Post();
+    newTweet.user = username;
+    newTweet.content = tweet;
+    newTweet.timeStamp = new Date();
+    this.posts.push(newTweet);
+  }
+
   ngOnInit() {
     this.tenSeconds();
   }
