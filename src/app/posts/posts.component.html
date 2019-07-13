@@ -1,4 +1,5 @@
 <h2>Tweets</h2>
+<button (click)="onHomeClick()">Home</button>
 <ul class="posts">
   <li *ngFor="let post of posts" class="post">
     <span class="user" (click)="onSelect($event)" id="{{ post.user }}">{{
